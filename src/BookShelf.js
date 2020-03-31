@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Book from './Book'
 
 class BookShelf extends Component {
   static propTypes = {
     shelfTitle: PropTypes.string.isRequired
   }
-  state = {}
+  state = {
+    books: []
+  }
 
   render () {
     const {shelfTitle} = this.props
@@ -14,8 +17,7 @@ class BookShelf extends Component {
         <h2 className="bookshelf-title">{shelfTitle}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            <li>Book 1</li>
-            <li>Book 2</li>
+            <li><Book/></li>
           </ol>
         </div>
       </div>
