@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import SearchResults from './SearchResults'
 
 class SearchPage extends Component {
   static propTypes = {}
@@ -23,9 +24,7 @@ class SearchPage extends Component {
             <input type="text" placeholder="Search by title or author"/>
           </div>
         </div>
-        <div className="search-books-results">
-          <ol className="books-grid"></ol>
-        </div>
+        <SearchResults />
       </div>
     )
   }
