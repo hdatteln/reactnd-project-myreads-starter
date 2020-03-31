@@ -4,20 +4,20 @@ import Book from './Book'
 
 class BookShelf extends Component {
   static propTypes = {
-    shelfTitle: PropTypes.string.isRequired
-  }
-  state = {
-    books: []
+    shelfTitle: PropTypes.string.isRequired,
+    filteredBooks: PropTypes.array.isRequired
   }
 
   render () {
-    const {shelfTitle} = this.props
+    const { shelfTitle, filteredBooks } = this.props
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfTitle}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            <li><Book/></li>
+            {filteredBooks.map((book) => (
+              <li key={book.id}><Book bookDetails={book} /></li>
+            ))}
           </ol>
         </div>
       </div>
