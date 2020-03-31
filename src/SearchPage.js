@@ -1,16 +1,18 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class SearchPage extends Component {
-  static propTypes = {};
-  state = {};
-  render() {
+  static propTypes = {}
+  state = {}
+
+  render () {
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button>Close</button>
+          <Link className="close-search" exact to='/'>Close</Link>
+
           <div className="search-books-input-wrapper">
-                 {/*
+            {/*
                    NOTES: The search from BooksAPI is limited to a particular set of search terms.
                    You can find these search terms here:
                    https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
@@ -18,10 +20,9 @@ class SearchPage extends Component {
                    However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                    you don't find a specific author or title. Every search is limited by search terms.
                  */}
-                 <input type="text" placeholder="Search by title or author"/>
+            <input type="text" placeholder="Search by title or author"/>
           </div>
         </div>
-        //ToDo: Make separate component for results
         <div className="search-books-results">
           <ol className="books-grid"></ol>
         </div>
