@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import BookShelf from './BookShelf'
 
 class BookList extends Component {
   static propTypes = {}
@@ -12,7 +13,9 @@ class BookList extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          Book content goes here
+          <BookShelf shelfTitle="Currently Reading" />
+          <BookShelf shelfTitle="Want to Read" />
+          <BookShelf shelfTitle="Read" />
         </div>
         <div className="open-search">
           <Link to='/search'>Add A Book</Link>
