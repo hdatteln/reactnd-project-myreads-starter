@@ -10,10 +10,11 @@ class SearchPage extends Component {
   state = {}
 
   render () {
+    const { books } = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" exact to='/'>Close</Link>
+          <Link className="close-search" to='/'>Close</Link>
 
           <div className="search-books-input-wrapper">
             {/*
@@ -27,7 +28,7 @@ class SearchPage extends Component {
             <input type="text" placeholder="Search by title or author"/>
           </div>
         </div>
-        <SearchResults />
+        <SearchResults searchResultBooks={books} />
       </div>
     )
   }

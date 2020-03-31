@@ -6,12 +6,13 @@ class SearchResults extends Component {
   state = {}
 
   render () {
+    const { searchResultBooks } = this.props;
     return (
         <div className="search-books-results">
           <ol className="books-grid">
-            <li>
-              <Book/>
-            </li>
+            {searchResultBooks.map((book) => (
+              <li key={book.id}><Book bookDetails={book} /></li>
+            ))}
           </ol>
         </div>
     )
