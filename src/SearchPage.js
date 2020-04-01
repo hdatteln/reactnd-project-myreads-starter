@@ -5,7 +5,8 @@ import PropTypes from 'prop-types'
 
 class SearchPage extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onUpdateBook: PropTypes.func.isRequired
   }
   state = {
     query: ''
@@ -21,7 +22,7 @@ class SearchPage extends Component {
   };
   render () {
     const { query } = this.state;
-    const { books } = this.props;
+    const { books, onUpdateBook } = this.props;
     const showingBooks = query === '' ? books : books.filter((b) => (
       b.title.toLowerCase().includes(query.toLowerCase()) || b.authors.join().toLowerCase().includes(query.toLowerCase())
     ));
@@ -45,7 +46,7 @@ class SearchPage extends Component {
               onChange={(event) => this.updateQuery(event.target.value)}  />
           </div>
         </div>
-        <SearchResults searchResultBooks={showingBooks} />
+        <SearchResults searchResultBooks={showingBooks} onUpdateBook={onUpdateBook}/>
         {showingBooks.length !== books.length && (
           <div className='search-results-message'>
             <span>Now showing {showingBooks.length} of {books.length} available books </span>
