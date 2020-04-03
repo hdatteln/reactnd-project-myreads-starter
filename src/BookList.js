@@ -5,20 +5,20 @@ import PropTypes from 'prop-types'
 
 class BookList extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
+    shelfBooks: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired
   }
   state = {}
 
   render () {
-    const { books, onUpdateBook } = this.props;
-    const currentlyReading = books.filter((b) => (
+    const { shelfBooks, onUpdateBook } = this.props;
+    const currentlyReading = shelfBooks.filter((b) => (
       b.shelf === 'currentlyReading')
     );
-    const read = books.filter((b) => (
+    const read = shelfBooks.filter((b) => (
       b.shelf === 'read')
     );
-    const wantToRead = books.filter((b) => (
+    const wantToRead = shelfBooks.filter((b) => (
       b.shelf === 'wantToRead')
     );
 

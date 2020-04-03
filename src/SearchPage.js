@@ -2,30 +2,64 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SearchResults from './SearchResults'
 import PropTypes from 'prop-types'
+import * as BooksAPI from './BooksAPI'
 
 class SearchPage extends Component {
   static propTypes = {
-    books: PropTypes.array.isRequired,
-    onUpdateBook: PropTypes.func.isRequired
+    shelfBooks: PropTypes.array.isRequired,
+    searchBooks: PropTypes.array.isRequired,
+    onUpdateBook: PropTypes.func.isRequired,
+    updateSearchState: PropTypes.func.isRequired
   }
   state = {
     query: ''
-  };
+  }
+
+  componentWillUnmount () {
+    this.setState(() => ({
+      query: ''
+    }))
+    this.props.updateSearchState([])
+  }
+
   updateQuery = (query) => {
     this.setState(() => ({
       query: query.trim()
     }))
+    if (query.trim() && query.trim().length < 1) {
+      this.props.updateSearchState([])
+    } else {
+      BooksAPI.search(query.trim())
+        .then((books) => {
+          const searchRes = books.filter((b) => {
+            let retval = true
+            if (!b.shelf) {
+              b.shelf = 'none'
+            }
+            this.props.shelfBooks.map((bk) => {
 
-  };
-  clearQuery = () => {
-    this.updateQuery('')
-  };
+              if (b.id === bk.id) {
+                console.log(b.id, bk.id)
+                retval = false
+
+              }
+              return null
+            })
+            return retval
+          })
+          this.props.updateSearchState(searchRes)
+
+        })
+        .catch((err) => {
+          console.log(err)
+          this.props.updateSearchState([])
+        })
+    }
+  }
+
   render () {
-    const { query } = this.state;
-    const { books, onUpdateBook } = this.props;
-    const showingBooks = query === '' ? books : books.filter((b) => (
-      b.title.toLowerCase().includes(query.toLowerCase()) || b.authors.join().toLowerCase().includes(query.toLowerCase())
-    ));
+    const {query} = this.state
+    const {onUpdateBook, searchBooks} = this.props
     return (
       <div className="search-books">
         <div className="search-books-bar">
@@ -43,16 +77,10 @@ class SearchPage extends Component {
               type="text"
               placeholder="Search by title or author"
               value={query}
-              onChange={(event) => this.updateQuery(event.target.value)}  />
+              onChange={(event) => this.updateQuery(event.target.value)}/>
           </div>
         </div>
-        <SearchResults searchResultBooks={showingBooks} onUpdateBook={onUpdateBook}/>
-        {showingBooks.length !== books.length && (
-          <div className='search-results-message'>
-            <span>Now showing {showingBooks.length} of {books.length} available books </span>
-            <button onClick={this.clearQuery}>Show all</button>
-          </div>
-        )}
+        <SearchResults searchResultBooks={searchBooks} onUpdateBook={onUpdateBook}/>
       </div>
     )
   }

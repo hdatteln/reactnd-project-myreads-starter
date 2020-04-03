@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 class SearchResults extends Component {
   static propTypes = {
     searchResultBooks: PropTypes.array.isRequired,
-    onUpdateBook: PropTypes.array.isRequired
+    onUpdateBook: PropTypes.func.isRequired
   }
 
   render () {

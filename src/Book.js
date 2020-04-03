@@ -9,14 +9,7 @@ class Book extends Component {
 
   render () {
     const { bookDetails, onUpdateBook } = this.props;
-    console.log(bookDetails.shelf)
-    const options = [
-      { value: 'move', label: 'Move to...' },
-      { value: 'currentlyReading', label: 'Currently Reading' },
-      { value: 'wantToRead', label: 'Want to Read' },
-      { value: 'read', label: 'Read' },
-      { value: 'none', label: 'None' }
-    ];
+    const bookAuthors = bookDetails.authors ? bookDetails.authors : [];
     return (
       <div className="book">
         <div className="book-top">
@@ -37,7 +30,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{bookDetails.title}</div>
-        {bookDetails.authors.map((author, index) => (
+        {bookAuthors.map((author, index) => (
           <div className="book-authors" key={ `author${index}` }>{author}</div>
         ))}
       </div>
