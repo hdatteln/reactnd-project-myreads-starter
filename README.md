@@ -59,7 +59,8 @@ In the input search box at the top of the page, enter one of the following searc
 'Web Development'
 ```
 
-You can use the control buttons on each displayed book in order to move it into one of your bookshelf areas (Want to Read/Read/Currently Reading);
+Books that match your search query are displayed below the search box.  
+You can use the control buttons on each displayed book in order to move it into one of your bookshelf areas (Want to Read/Read/Currently Reading).
 
 
 ## Resources and Documentation:
