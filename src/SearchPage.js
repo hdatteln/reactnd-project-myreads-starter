@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import SearchResults from './SearchResults'
-import PropTypes from 'prop-types'
-import * as BooksAPI from './BooksAPI'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import SearchResults from './SearchResults';
+import PropTypes from 'prop-types';
+import * as BooksAPI from './BooksAPI';
 
 class SearchPage extends Component {
   static propTypes = {
@@ -19,32 +19,36 @@ class SearchPage extends Component {
     this.setState(() => ({
       query: query.trim()
     }));
-    if (query.trim() && query.trim().length < 1) {
-      this.props.updateSearchState([])
+    if (!query || (query.trim() && query.trim().length < 1)) {
+      this.props.updateSearchState([]);
     } else {
       BooksAPI.search(query.trim())
         .then((books) => {
-          const searchRes = books.filter((b) => {
-            let retval = true;
-            if (!b.shelf) {
-              b.shelf = 'none'
-            }
-            this.props.shelfBooks.map((bk) => {
-
-              if (b.id === bk.id) {
-                retval = false
+          let searchRes = [];
+          if (books && !books.error) {
+            searchRes = books.filter((b) => {
+              let retval = true;
+              if (!b.shelf) {
+                b.shelf = 'none';
               }
-              return null
-            });
-            return retval
-          });
-          this.props.updateSearchState(searchRes)
+              this.props.shelfBooks.map((bk) => {
 
+                if (b.id === bk.id) {
+                  retval = false;
+                }
+                return null;
+              });
+              return retval;
+            });
+            this.props.updateSearchState(searchRes);
+          } else {
+            this.props.updateSearchState([]);
+          }
         })
         .catch((err) => {
           console.log(err);
-          this.props.updateSearchState([])
-        })
+          this.props.updateSearchState([]);
+        });
     }
   };
 
@@ -73,8 +77,8 @@ class SearchPage extends Component {
         </div>
         <SearchResults searchResultBooks={searchBooks} onUpdateBook={onUpdateBook}/>
       </div>
-    )
+    );
   }
 }
 
-export default SearchPage
+export default SearchPage;
