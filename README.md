@@ -3,16 +3,16 @@
 This bookshelf application was developed as part of the Udacity React Nanodegree Program.  
 
 It allows you to select and categorize books you have read, are currently reading, or want to read. 
-You can also search for books using a predefined list of keywords, and add to your bookshelf from the search results.
+You can also search for books using a predefined list of keywords, and add books to your bookshelf from those search results.
 
 ## Installing the App
 ### Node
 This application was developed using Node.js, version v13.11.0.  
-Just go on [official Node.js website](https://nodejs.org/) and download the installer.
+Just go to the [official Node.js website](https://nodejs.org/) and download the installer.
 Also, be sure to have `git` available in your PATH, `npm` might need it (You can find git [here](https://git-scm.com/)).
 
 ### Bookshelf Application
-* Clone or download this project. 
+* Clone or download this project: `git clone https://github.com/hdatteln/reactnd-project-myreads-starter.git` 
 * In the project's root directory, run `npm install` to install the required packages
 
 
@@ -21,7 +21,7 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
 * A new browser window should automatically open and display the app. If it doesn't, navigate to http://localhost:3000/ in your browser.
 
 ## Using the App
-### Bookshelf
+### Bookshelf (http://localhost:3000/)
 The bookshelf consists of three areas:
 * Currently Reading
 * Want to Read
@@ -29,8 +29,11 @@ The bookshelf consists of three areas:
 
 You can use the control buttons on each displayed book in order to move a book from one section to another (Want to Read/Read/Currently Reading), or to remove it from the bookshelf view by selecting 'None'
 
+![](public/myreads_shelf.png)  
 
-### Search
+
+
+### Search (http://localhost:3000/search)
 In the input search box at the top of the page, enter one of the following search terms:
 
 ```'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen',   
