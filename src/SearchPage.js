@@ -10,60 +10,51 @@ class SearchPage extends Component {
     searchBooks: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired,
     updateSearchState: PropTypes.func.isRequired
-  }
+  };
   state = {
     query: ''
-  }
-
-  componentWillUnmount () {
-    this.setState(() => ({
-      query: ''
-    }))
-    this.props.updateSearchState([])
-  }
+  };
 
   updateQuery = (query) => {
     this.setState(() => ({
       query: query.trim()
-    }))
+    }));
     if (query.trim() && query.trim().length < 1) {
       this.props.updateSearchState([])
     } else {
       BooksAPI.search(query.trim())
         .then((books) => {
           const searchRes = books.filter((b) => {
-            let retval = true
+            let retval = true;
             if (!b.shelf) {
               b.shelf = 'none'
             }
             this.props.shelfBooks.map((bk) => {
 
               if (b.id === bk.id) {
-                console.log(b.id, bk.id)
                 retval = false
-
               }
               return null
-            })
+            });
             return retval
-          })
+          });
           this.props.updateSearchState(searchRes)
 
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           this.props.updateSearchState([])
         })
     }
-  }
+  };
 
   render () {
-    const {query} = this.state
-    const {onUpdateBook, searchBooks} = this.props
+    const {query} = this.state;
+    const {onUpdateBook, searchBooks} = this.props;
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <Link className="close-search" to='/'>Close</Link>
+          <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
             {/*
                    NOTES: The search from BooksAPI is limited to a particular set of search terms.

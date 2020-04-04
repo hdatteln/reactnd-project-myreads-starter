@@ -7,10 +7,10 @@ class BookShelf extends Component {
     shelfTitle: PropTypes.string.isRequired,
     filteredBooks: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired
-  }
+  };
 
   render () {
-    const { shelfTitle, filteredBooks, onUpdateBook } = this.props
+    const {shelfTitle, filteredBooks, onUpdateBook} = this.props;
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">{shelfTitle}</h2>

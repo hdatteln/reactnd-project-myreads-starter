@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Book extends Component {
   static propTypes = {
     bookDetails: PropTypes.object.isRequired,
     onUpdateBook: PropTypes.func.isRequired
-  }
+  };
 
   render () {
-    const { bookDetails, onUpdateBook } = this.props;
+    const {bookDetails, onUpdateBook} = this.props;
     const bookAuthors = bookDetails.authors ? bookDetails.authors : [];
     return (
       <div className="book">
         <div className="book-top">
           <div
             className="book-cover"
-            style={{ width: 128, height: 192, backgroundImage: `url(${bookDetails.imageLinks.thumbnail})` }}>
+            style={{width: 128, height: 192, backgroundImage: `url(${bookDetails.imageLinks.thumbnail})`}}>
 
           </div>
           <div className="book-shelf-changer">
@@ -31,7 +31,7 @@ class Book extends Component {
         </div>
         <div className="book-title">{bookDetails.title}</div>
         {bookAuthors.map((author, index) => (
-          <div className="book-authors" key={ `author${index}` }>{author}</div>
+          <div className="book-authors" key={`author${index}`}>{author}</div>
         ))}
       </div>
     )

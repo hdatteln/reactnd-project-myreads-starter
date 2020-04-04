@@ -6,18 +6,18 @@ class SearchResults extends Component {
   static propTypes = {
     searchResultBooks: PropTypes.array.isRequired,
     onUpdateBook: PropTypes.func.isRequired
-  }
+  };
 
   render () {
-    const { searchResultBooks, onUpdateBook } = this.props;
+    const {searchResultBooks, onUpdateBook} = this.props;
     return (
-        <div className="search-books-results">
-          <ol className="books-grid">
-            {searchResultBooks.map((book) => (
-              <li key={book.id}><Book bookDetails={book} onUpdateBook={onUpdateBook}/></li>
-            ))}
-          </ol>
-        </div>
+      <div className="search-books-results">
+        <ol className="books-grid">
+          {searchResultBooks.map((book) => (
+            <li key={book.id}><Book bookDetails={book} onUpdateBook={onUpdateBook}/></li>
+          ))}
+        </ol>
+      </div>
     )
   }
 }

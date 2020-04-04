@@ -9,7 +9,7 @@ class BooksApp extends React.Component {
   state = {
     shelfBooks: [],
     searchBooks: []
-  }
+  };
 
   componentDidMount () {
     BooksAPI.getAll().then(
@@ -25,12 +25,12 @@ class BooksApp extends React.Component {
     this.setState(currentState => ({
       searchBooks: books
     }))
-  }
+  };
 
   updateBook = (book, newVal) => {
     if (book.shelf === 'none' && newVal !== 'none') {
       // Search Page
-      book.shelf = newVal
+      book.shelf = newVal;
       this.setState(currentState => ({
         shelfBooks: [...currentState.shelfBooks, book],
         searchBooks: currentState.searchBooks.filter((b) => {
@@ -38,7 +38,7 @@ class BooksApp extends React.Component {
         })
       }))
     } else if (book.shelf !== 'none' && newVal === 'none') {
-      book.shelf = newVal
+      book.shelf = newVal;
       this.setState((currentState) => ({
           shelfBooks: currentState.shelfBooks.filter((b) => {
               return b.id !== book.id
@@ -59,7 +59,7 @@ class BooksApp extends React.Component {
       )
     }
     BooksAPI.update(book)
-  }
+  };
 
   render () {
     return (
