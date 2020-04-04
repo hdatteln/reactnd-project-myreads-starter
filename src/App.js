@@ -1,9 +1,9 @@
-import React from 'react'
-import * as BooksAPI from './BooksAPI'
-import './App.css'
-import { Route } from 'react-router-dom'
-import BookList from './BookList'
-import SearchPage from './SearchPage'
+import React from 'react';
+import * as BooksAPI from './BooksAPI';
+import './App.css';
+import { Route } from 'react-router-dom';
+import BookList from './BookList';
+import SearchPage from './SearchPage';
 
 class BooksApp extends React.Component {
   state = {
@@ -16,10 +16,10 @@ class BooksApp extends React.Component {
       (books) => {
         this.setState(() => ({
           shelfBooks: books
-        }))
+        }));
       }
-    )
-  }
+    );
+  };
 
   updateSearchState = (books) => {
     this.setState(currentState => ({
@@ -34,31 +34,33 @@ class BooksApp extends React.Component {
       this.setState(currentState => ({
         shelfBooks: [...currentState.shelfBooks, book],
         searchBooks: currentState.searchBooks.filter((b) => {
-          return b.shelf === 'none'
+          return b.shelf === 'none';
         })
-      }))
+      }));
     } else if (book.shelf !== 'none' && newVal === 'none') {
+      // removing a book from a shelf
       book.shelf = newVal;
       this.setState((currentState) => ({
           shelfBooks: currentState.shelfBooks.filter((b) => {
-              return b.id !== book.id
+              return b.id !== book.id;
             }
           )
         })
-      )
+      );
     } else {
       this.setState((currentState) => ({
+          //moving a book from one shelf to another
           shelfBooks: currentState.shelfBooks.map((b) => {
               if (b.id === book.id && newVal !== 'none') {
-                b.shelf = newVal
+                b.shelf = newVal;
               }
-              return b
+              return b;
             }
           )
         })
-      )
+      );
     }
-    BooksAPI.update(book)
+    BooksAPI.update(book, book.shelf);
   };
 
   render () {
@@ -72,8 +74,8 @@ class BooksApp extends React.Component {
                       updateSearchState={this.updateSearchState} onUpdateBook={this.updateBook}/>
         )}/>
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;
