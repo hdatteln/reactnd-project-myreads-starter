@@ -15,28 +15,41 @@ class SearchPage extends Component {
     query: ''
   };
 
+  componentWillUnmount () {
+    this.setState(() => ({
+      query: ''
+    }));
+    this.props.updateSearchState([])
+  }
+
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query
     }));
     if (!query || (query.trim() && query.trim().length < 1)) {
+      this.setState(() => ({
+        query: ''
+      }));
       this.props.updateSearchState([]);
     } else {
-      BooksAPI.search(query.trim())
+      BooksAPI.search(query)
         .then((books) => {
           let searchRes = [];
           if (books && !books.error) {
             searchRes = books.filter((b) => {
               let retval = true;
+              if(!b.imageLinks) {
+                retval = false;
+              }
               if (!b.shelf) {
                 b.shelf = 'none';
               }
               this.props.shelfBooks.map((bk) => {
 
                 if (b.id === bk.id) {
-                  retval = false;
+                  b.shelf = bk.shelf;
                 }
-                return null;
+                return bk;
               });
               return retval;
             });

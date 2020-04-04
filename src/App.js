@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
   };
 
   updateSearchState = (books) => {
-    this.setState(currentState => ({
+    this.setState(() => ({
       searchBooks: books
     }))
   };
@@ -32,10 +32,7 @@ class BooksApp extends React.Component {
       // Search Page
       book.shelf = newVal;
       this.setState(currentState => ({
-        shelfBooks: [...currentState.shelfBooks, book],
-        searchBooks: currentState.searchBooks.filter((b) => {
-          return b.shelf === 'none';
-        })
+        shelfBooks: [...currentState.shelfBooks, book]
       }));
     } else if (book.shelf !== 'none' && newVal === 'none') {
       // removing a book from a shelf
