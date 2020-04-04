@@ -60,7 +60,7 @@ class BooksApp extends React.Component {
         })
       );
     }
-    BooksAPI.update(book, book.shelf);
+    BooksAPI.update(book, newVal);
   };
 
   render () {
